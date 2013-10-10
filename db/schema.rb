@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131010041026) do
+ActiveRecord::Schema.define(version: 20131010041318) do
 
   create_table "dashboards", force: true do |t|
     t.integer  "blog_posts"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20131010041026) do
     t.boolean  "climbed"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "email_conversations"
+    t.integer  "calendar_events"
   end
 
 end
