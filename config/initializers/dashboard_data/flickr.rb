@@ -1,0 +1,1 @@
+FLICKR_URL="http://api.flickr.com/services/rest/?method=flickr.people.getInfo&api_key=#{ENV["FLICKR_KEY"]}&user_id=97643870@N04"
