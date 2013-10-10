@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131010032400) do
+ActiveRecord::Schema.define(version: 20131010041026) do
 
   create_table "dashboards", force: true do |t|
     t.integer  "blog_posts"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20131010032400) do
     t.boolean  "had_sex"
     t.boolean  "stretched"
     t.string   "mood"
-    t.boolean  "slept"
+    t.integer  "slept"
     t.boolean  "climbed"
     t.datetime "created_at"
     t.datetime "updated_at"
