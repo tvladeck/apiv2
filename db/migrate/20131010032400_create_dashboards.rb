@@ -10,7 +10,7 @@ class CreateDashboards < ActiveRecord::Migration
       t.boolean :had_sex
       t.boolean :stretched
       t.string :mood
-      t.boolean :slept
+      t.integer :slept
       t.boolean :climbed
 
       t.timestamps
