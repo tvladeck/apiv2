@@ -11,7 +11,7 @@ class DashboardsController < ApplicationController
   end
   
   def edit
-    @dashboard = Dashboard.find(dashboard_params[:id])
+    @dashboard = Dashboard.find(params[:id])
   end
   
   def update
@@ -31,8 +31,7 @@ class DashboardsController < ApplicationController
 private
 
   def dashboard_params
-    params.require(:dashboard).permit(:id,
-                                      :meditated,
+    params.require(:dashboard).permit(:meditated,
                                       :weight,
                                       :stretched,
                                       :climbed,
