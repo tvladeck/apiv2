@@ -27,6 +27,7 @@ private
 
   def dashboard_params
     params.require(:dashboard).permit(:meditated,
+                                      :weight,
                                       :stretched,
                                       :climbed,
                                       :mood,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131010041318) do
+ActiveRecord::Schema.define(version: 20131014053412) do
 
   create_table "dashboards", force: true do |t|
     t.integer  "blog_posts"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20131010041318) do
     t.datetime "updated_at"
     t.integer  "email_conversations"
     t.integer  "calendar_events"
+    t.integer  "weight"
   end
 
 end
