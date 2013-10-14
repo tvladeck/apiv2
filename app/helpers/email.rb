@@ -44,7 +44,7 @@ module Email
       end
       
       not_last_dependent.each do |key|
-        val = current.send(key)
+        val = last.send(key)
         dashboard[key] = val != nil ? val : "nope!"
       end
       
@@ -53,7 +53,7 @@ module Email
         text << "\n"
       end
       
-      text << "http://cryptic-thicket-6982.herokuapp.com/dashboards/edit/#{Dashboard.last.id}"
+      text << "http://cryptic-thicket-6982.herokuapp.com/dashboards/#{Dashboard.last.id}/edit"
         
       
       
