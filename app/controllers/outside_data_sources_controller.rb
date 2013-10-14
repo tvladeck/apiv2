@@ -5,9 +5,7 @@ class OutsideDataSourcesController < ApplicationController
   # pull latest dashboard instance
   # summarize it
   # send email w/ summary and link to dashboard#new
-    Email.send_summary_email
-    render nothing: true, status: 200
-    
+    Email.send_summary_email    
   end
   
   

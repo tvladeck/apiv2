@@ -8,7 +8,12 @@ module Email
   def send_summary_email
     dashboard_length = Dashboard.count
     current = Dashboard.find(dashboard_length)
-    last = Dashboard.find(dashboard_length-1)
+    
+    begin
+      last = Dashboard.find(dashboard_length-1)
+    rescue
+      last = Dashboard.new
+    end
     
     dashboard = {}
     text = ""
