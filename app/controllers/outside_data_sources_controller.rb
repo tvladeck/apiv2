@@ -14,11 +14,8 @@ class OutsideDataSourcesController < ApplicationController
     
     # pulls from all outside data sources, params and api-data
     
-    if Dashboard.last.update_at.day == Date.today.day
-      @dashboard = Dashboard.last
-    else
-      @dashboard = Dashboard.new
-    end
+    @dashboard = Dashboard.new
+
     
     api_data = DashboardData.data
     @dashboard.update_attributes api_data

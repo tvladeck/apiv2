@@ -53,7 +53,7 @@ module Email
         text << "\n"
       end
       
-      text << "http://cryptic-thicket-6982.herokuapp.com/dashboards/new"
+      text << "http://cryptic-thicket-6982.herokuapp.com/dashboards/edit/#{Dashboard.last.id}"
         
       
       

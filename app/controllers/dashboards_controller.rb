@@ -5,15 +5,18 @@ class DashboardsController < ApplicationController
   end
   
   def create
-    # this method only pulls from both the user-submitted form
-    
-    
-    # data from APIs
-    # the data from APIs comes from DashboardData.data
-    # the data from the form will come from the params
-
+    # this method only pulls from the user-submitted form
     @dashboard = Dashboard.create dashboard_params
-
+    redirect_to dashboards_path
+  end
+  
+  def edit
+    @dashboard = Dashboard.find(dashboard_params[:id])
+  end
+  
+  def update
+    # this method only pulls from the user-submitted form
+    @dashboard = Dashboard.create dashboard_params
     redirect_to dashboards_path
   end
   
@@ -28,7 +31,8 @@ class DashboardsController < ApplicationController
 private
 
   def dashboard_params
-    params.require(:dashboard).permit(:meditated,
+    params.require(:dashboard).permit(:id,
+                                      :meditated,
                                       :weight,
                                       :stretched,
                                       :climbed,
