@@ -39,8 +39,12 @@ module Email
                           
       last_dependent.each do |key|
         _current = current.send(key) != nil ? current.send(key) : 0
-        _last = last.send(key) != nil ? current.send(key) : 0
-        dashboard[key] = _current - _last
+        _last = last.send(key) != nil ? last.send(key) : 0
+        begin
+          dashboard[key] = _current - _last
+        rescue
+          dashboard[key] = "error"
+        end
       end
       
       not_last_dependent.each do |key|
