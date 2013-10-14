@@ -11,7 +11,18 @@ class OutsideDataSourcesController < ApplicationController
   
   
   def create
-    @dashboard = Dashboard.last
+    
+    # pulls from all outside data sources, params and api-data
+    
+    if Dashboard.last.update_at.day == Date.today.day
+      @dashboard = Dashboard.last
+    else
+      @dashboard = Dashboard.new
+    end
+    
+    api_data = DashboardData.data
+    @dashboard.update_attributes api_data
+    
     @dashboard.update_attributes outside_params
     redirect_to dashboards_path
   end

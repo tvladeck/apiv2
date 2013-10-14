@@ -5,13 +5,15 @@ class DashboardsController < ApplicationController
   end
   
   def create
-    # this method pulls from both the user-submitted form and 
+    # this method only pulls from both the user-submitted form
+    
+    
     # data from APIs
     # the data from APIs comes from DashboardData.data
     # the data from the form will come from the params
-    api_data = DashboardData.data
+
     @dashboard = Dashboard.create dashboard_params
-    @dashboard.update_attributes api_data
+
     redirect_to dashboards_path
   end
   
