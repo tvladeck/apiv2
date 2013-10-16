@@ -7,9 +7,12 @@ module Email
 
   def send_summary_email
     dashboard_length = Dashboard.count
+    
+    # current should have only API data
     current = Dashboard.find(dashboard_length)
     
     begin
+    # last should have both API data and form data
       last = Dashboard.find(dashboard_length-1)
     rescue
       last = Dashboard.new
@@ -18,13 +21,15 @@ module Email
     dashboard = {}
     text = ""
 
-    
-    last_dependent     = [:blog_posts,
+    # metrics that are collected in aggregate
+    # the difference needs to be taken to get a daily figure
+    summary_form        = [:blog_posts,
                           :checkins,
                           :photos,
                           :tasks]
     
-    not_last_dependent = [:active_score,
+    # metrics that only reflect the day they are captured
+    daily_form          = [:active_score,
                           :weight,
                           :meditated,
                           :had_sex,
@@ -35,40 +40,50 @@ module Email
                           :email_conversations,
                           :calendar_events]
                           
-      all = last_dependent|not_last_dependent
+    all = summary_form|daily_form
                           
-      last_dependent.each do |key|
-        _current = current.send(key) != nil ? current.send(key) : 0
-        _last = last.send(key) != nil ? last.send(key) : 0
-        begin
-          dashboard[key] = _current - _last
-        rescue
-          dashboard[key] = "error"
-        end
+    summary_form.each do |key|
+      _current = current.send(key)
+      _last = last.send(key)
+      
+      if _current == nil
+        _current = 0
       end
       
-      not_last_dependent.each do |key|
-        val = last.send(key)
-        dashboard[key] = val != nil ? val : "nope!"
-      end
-      
-      all.each do |key|
-        text << "#{key.to_s}: #{dashboard[key]}"
-        text << "\n"
-      end
-      
-      text << "http://cryptic-thicket-6982.herokuapp.com/dashboards/#{Dashboard.last.id}/edit"
+      if _last == nil
+        _last = 0
+      end  
         
-      
-      
-      data = {}
-      data[:from] = "Yourself <thomas.vladeck@gmail.com>"
-      data[:to] = "Tom <thomas.vladeck@gmail.com>"
-      data[:subject] = "Morning Sumary"
-      data[:text] = text
-      
-      RestClient.post(API_URL, data)
+      begin
+        dashboard[key] = _current - _last
+      rescue
+        dashboard[key] = "error"
+      end
     end
+      
+    daily_form.each do |key|
+      val = last.send(key)
+      if val == nil
+        val = "not captured."
+      end
+      dashboard[key] = val
+    end
+    
+    all.each do |key|
+      text << "#{key.to_s}: #{dashboard[key]}"
+      text << "\n"
+    end
+    
+    text << "http://cryptic-thicket-6982.herokuapp.com/dashboards/#{Dashboard.last.id}/edit"
+
+    data = {}
+    data[:from] = "Yourself <thomas.vladeck@gmail.com>"
+    data[:to] = "Tom <thomas.vladeck@gmail.com>"
+    data[:subject] = "Morning Sumary"
+    data[:text] = text
+    
+    RestClient.post(API_URL, data)
+  end
     
 
 end

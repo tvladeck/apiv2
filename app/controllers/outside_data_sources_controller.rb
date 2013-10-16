@@ -15,7 +15,6 @@ class OutsideDataSourcesController < ApplicationController
     # pulls from all outside data sources, params and api-data
     
     @dashboard = Dashboard.new
-
     
     api_data = DashboardData.data
     @dashboard.update_attributes api_data

@@ -16,7 +16,8 @@ class DashboardsController < ApplicationController
   
   def update
     # this method only pulls from the user-submitted form
-    @dashboard = Dashboard.create dashboard_params
+    @dashboard = Dashboard.find(params[:id])
+    @dashboard.update_attributes dashboard_params
     redirect_to dashboards_path
   end
   
